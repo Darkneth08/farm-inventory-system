@@ -1,5 +1,7 @@
 {
     "$schema": "https://www.schemastore.org/package.json",
+    "name": "farm-inventory-system",
+    "description": "Farm supply inventory system frontend assets and tooling.",
     "private": true,
     "type": "module",
     "scripts": {

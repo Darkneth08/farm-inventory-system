@@ -1,10 +1,17 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "darkneth08/farm-inventory-system",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Farm supply inventory system with customer portal, POS, inventory operations, reports, and super admin tools.",
+    "keywords": ["laravel", "farm-supply", "inventory-management", "pos", "reporting"],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Kenneth Borja",
+            "homepage": "https://github.com/Darkneth08",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.1",
