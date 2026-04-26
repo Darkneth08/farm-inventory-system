@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3 - Farm Supply Inventory System</title>
+    <style>
+        :root {
+            --text: #17212b;
+            --muted: #5a6773;
+            --rule: #d7dce1;
+            --paper: #ffffff;
+            --accent: #175b74;
+            --accent-soft: #eef6fa;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: #eff2f5;
+            color: var(--text);
+            font-family: "Times New Roman", Georgia, serif;
+            line-height: 1.68;
+        }
+
+        .page {
+            width: min(960px, calc(100% - 32px));
+            margin: 32px auto;
+            background: var(--paper);
+            padding: 56px 64px;
+            box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08);
+        }
+
+        h1, h2, h3 {
+            margin: 0 0 12px;
+            line-height: 1.3;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 30px;
+        }
+
+        h2 {
+            margin-top: 30px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--rule);
+            color: var(--accent);
+            font-size: 24px;
+        }
+
+        h3 {
+            margin-top: 22px;
+            font-size: 19px;
+        }
+
+        p {
+            margin: 0 0 14px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 0 0 16px 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 18px;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid var(--rule);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: var(--accent-soft);
+        }
+
+        .subtitle {
+            margin-bottom: 24px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .manual-block {
+            margin: 16px 0 18px;
+            padding: 16px 18px;
+            border: 1px solid var(--rule);
+            background: #fbfcfd;
+        }
+
+        .manual-block h3 {
+            margin-top: 0;
+        }
+
+        .flow-note {
+            padding: 12px 14px;
+            background: var(--accent-soft);
+            border-left: 4px solid var(--accent);
+            margin: 12px 0 18px;
+        }
+
+        @media print {
+            body { background: #fff; }
+            .page {
+                width: auto;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <h1>Chapter 3: User Interface Manual and Feature Highlights</h1>
+        <p class="subtitle">Farm Supply Inventory System</p>
+
+        <h2>X. User Interface Manual</h2>
+        <p>The Farm Supply Inventory System does not use one generic dashboard for all users. It uses a shared application shell with role-based landing views and role-based navigation. This chapter follows the actual interface flow of the current system.</p>
+
+        <section class="manual-block">
+            <h3>1. Opening the System</h3>
+            <ol>
+                <li>Open the Farm Supply Inventory landing page in a browser.</li>
+                <li>Review the public sections such as <code>Features</code>, <code>Why It Works</code>, <code>FAQ</code>, <code>Get Started</code>, and <code>Contact</code>.</li>
+                <li>Click <code>Log In</code> to open the login form or <code>Create Account</code> to register.</li>
+            </ol>
+            <p>Public components include the landing navigation bar, hero section with product preview, feature cards, and login or registration actions.</p>
+        </section>
+
+        <section class="manual-block">
+            <h3>2. Logging In</h3>
+            <ol>
+                <li>Enter email and password.</li>
+                <li>Click <code>Login</code>.</li>
+                <li>Wait for the system to validate the credentials.</li>
+            </ol>
+            <p>Valid credentials open the protected app shell, while invalid credentials show an error alert. The first screen depends on role: <strong>customer</strong> users open <strong>Customer Home</strong>, <strong>staff</strong> users open <strong>Staff Desk</strong>, and <strong>manager</strong>, <strong>admin</strong>, and <strong>super_admin</strong> users open <strong>Dashboard</strong>.</p>
+        </section>
+
+        <section class="manual-block">
+            <h3>3. Shared Application Shell</h3>
+            <p>After authentication, the user enters the main app shell.</p>
+            <ul>
+                <li>Left sidebar with brand title, subtitle, and role-mode pill</li>
+                <li>Role-aware menu buttons</li>
+                <li>Top header with current view title and subtitle</li>
+                <li>Current user information box</li>
+                <li><code>Refresh</code> button</li>
+                <li><code>Logout</code> button</li>
+            </ul>
+            <p>The sidebar can show the following labels depending on role: <code>Dashboard</code>, <code>Staff Desk</code>, <code>Home</code>, <code>Shop</code>, <code>My Orders</code>, <code>Favorites</code>, <code>Profile</code>, <code>POS</code> or <code>POS Counter</code>, <code>Operations</code>, <code>Reports</code> or <code>Shift Reports</code>, <code>Users</code>, and <code>Super Admin</code>.</p>
+        </section>
+
+        <section class="manual-block">
+            <h3>4. Admin Dashboard</h3>
+            <p>The real <code>Dashboard</code> screen is used for manager, admin, and super admin workflows.</p>
+            <ul>
+                <li><code>Admin overview</code> guide panel</li>
+                <li>Shortcut buttons such as <code>Open Stock Tasks</code> and <code>Open Reports</code></li>
+                <li>Workflow strip: <code>Watch</code>, <code>Update</code>, <code>Review</code></li>
+                <li>KPI cards for <code>Products</code>, <code>Active Products</code>, <code>Low Stock</code>, <code>Out Of Stock</code>, <code>Inventory Value</code>, <code>Today Sales</code>, <code>Month Sales</code>, <code>Total Suppliers</code>, and <code>Total Branches</code></li>
+                <li><code>Low-Stock Watch</code> table</li>
+                <li><code>Recent Activity</code> list</li>
+                <li><code>Top Movers</code>, <code>Stock by Category</code>, and <code>Monthly Sales</code> tables</li>
+            </ul>
+            <p>Users start by reviewing stock risk and recent movement, then open <code>Operations</code> for stock work or <code>Reports</code> for deeper review.</p>
+        </section>
+
+        <section class="manual-block">
+            <h3>5. Staff Desk</h3>
+            <p>The real default staff landing view is <code>Staff Desk</code>.</p>
+            <ul>
+                <li><code>Staff Operations Hub</code> hero panel</li>
+                <li><code>Open POS</code> button</li>
+                <li><code>Shift Snapshot</code></li>
+                <li><code>Next steps</code></li>
+                <li>Metric cards for active products, low-stock alerts, today sales, and branches</li>
+                <li><code>Low-Stock Watch</code></li>
+                <li><code>Recent Movement</code></li>
+                <li><code>POS Snapshot</code></li>
+            </ul>
+            <p>This page reduces clutter and moves staff quickly into checkout, stock checking, and receiving tasks.</p>
+        </section>
+
+        <section class="manual-block">
+            <h3>6. Customer Home</h3>
+            <p>The real default customer landing view is <code>Customer Home</code>.</p>
+            <ul>
+                <li>Mini navigation: <code>Overview</code>, <code>Steps</code>, <code>Quick Tools</code>, <code>Delivery</code></li>
+                <li>Welcome hero and action buttons</li>
+                <li>Metrics for <code>Products</code>, <code>Cart</code>, <code>Active Orders</code>, and <code>Favorites</code></li>
+                <li>Delivery profile card</li>
+                <li><code>Start Here</code> panel</li>
+                <li><code>Main customer tools</code> panel</li>
+                <li><code>Delivery Details</code> panel</li>
+            </ul>
+            <p>This home screen prepares the customer before opening the full customer workspace.</p>
+        </section>
+
+        <section class="manual-block">
+            <h3>7. Customer Workspace</h3>
+            <p>The <code>Customer Workspace</code> uses four real sections: <code>Browse</code>, <code>Orders</code>, <code>Favorites</code>, and <code>Profile</code>.</p>
+
+            <h3>7.1 Browse</h3>
+            <p>The <code>Browse</code> section is divided into the real workflow cards <code>1. Browse products</code>, <code>2. Review product</code>, and <code>3. Checkout</code>.</p>
+            <ul>
+                <li>Catalog search input</li>
+                <li>Stock-status filter</li>
+                <li>Sort dropdown</li>
+                <li>Product cards with <code>View</code>, <code>Favorite</code>, and <code>Add to Cart</code></li>
+                <li>Product spotlight card with price, category, supplier, stock, and customer reviews</li>
+                <li>Cart panel with quantity controls</li>
+                <li>Payment method selector: <code>COD</code>, <code>Cash</code>, <code>Online Payment</code></li>
+                <li>Optional promotion code and delivery notes</li>
+                <li><code>Place COD order</code>, <code>Place cash order</code>, or <code>Place online order</code></li>
+            </ul>
+
+            <h3>7.2 Orders</h3>
+            <p>The <code>Orders</code> section contains tracking summary chips, live tracking cards, an order table, a request form, and a request history table. Customers can review order status, reorder previous items, and submit product requests.</p>
+
+            <h3>7.3 Favorites</h3>
+            <p>The <code>Favorites</code> section contains <code>Saved for later</code>, <code>Low-stock alerts</code>, <code>Updates</code>, and <code>Seasonal picks</code>. It keeps saved products, alerts, notifications, and suggestions together.</p>
+
+            <h3>7.4 Profile</h3>
+            <p>The <code>Profile</code> section contains the profile form, password form, and product review form so delivery details remain ready for checkout.</p>
+        </section>
+
+        <section class="manual-block">
+            <h3>8. POS Counter</h3>
+            <p>The real POS screen is the dedicated staff sales transaction view.</p>
+            <ul>
+                <li><code>POS Workspace</code> hero</li>
+                <li>Live warehouse label and stock-source note</li>
+                <li>Step strip: <code>Select warehouse</code>, <code>Add products</code>, <code>Complete payment</code></li>
+                <li>Warehouse selector and product search</li>
+                <li>Live product catalog cards</li>
+                <li>Checkout form</li>
+                <li>Discount and payment controls</li>
+                <li>Sale cart with editable quantity inputs</li>
+                <li>Summary chips for items, subtotal, discount, grand total, amount tendered, balance due, change, and payment status</li>
+                <li><code>Complete Sale</code> button</li>
+                <li><code>Sale result</code> card</li>
+                <li><code>Print Last Receipt</code></li>
+                <li><code>Recent POS Sales</code></li>
+            </ul>
+            <p>This is the actual main transaction screen used for counter checkout.</p>
+        </section>
+
+        <section class="manual-block">
+            <h3>9. Operations Workspace</h3>
+            <p>The <code>Operations</code> view is organized into the real tabs <code>Setup</code>, <code>Product Catalog</code>, <code>Stock Adjustment</code>, <code>Inventory Summary</code>, <code>Batch Health</code>, <code>Receiving</code>, <code>Orders</code>, and <code>Branches</code>.</p>
+            <ul>
+                <li><strong>Setup:</strong> category, supplier, and warehouse forms</li>
+                <li><strong>Product Catalog:</strong> product form, catalog list table, and quick stock in/out form</li>
+                <li><strong>Stock Adjustment:</strong> presets, draft summary chips, adjustment form, draft table, and posted history</li>
+                <li><strong>Inventory Summary:</strong> inventory KPI chips, status breakdown, and warehouse summary table</li>
+                <li><strong>Batch Health:</strong> filters, status update form, aging metrics, batch table, and aging table</li>
+                <li><strong>Receiving:</strong> supply deliveries form, draft delivery items, and recent stock receipts</li>
+                <li><strong>Orders:</strong> order management and promotions</li>
+                <li><strong>Branches:</strong> smart forecasting, multi-branch management, and branch inventory overview</li>
+            </ul>
+        </section>
+
+        <section class="manual-block">
+            <h3>10. Reports Workspace</h3>
+            <p>The <code>Reports</code> view is organized into the real report groups <code>Inventory</code>, <code>Sales</code>, <code>Access Logs</code>, and <code>Settings</code>.</p>
+            <ul>
+                <li><strong>Inventory:</strong> <code>Movement Summary</code> and <code>Expiring Stock</code></li>
+                <li><strong>Sales:</strong> <code>Sales Report</code>, <code>Top Selling Products</code>, <code>Inventory Value</code>, and <code>Low Stock Report</code></li>
+                <li><strong>Access Logs:</strong> <code>Login Activities</code> and <code>Audit Logs</code></li>
+                <li><strong>Settings:</strong> <code>Settings &amp; Backup</code> and <code>Safeguards</code></li>
+            </ul>
+        </section>
+
+        <section class="manual-block">
+            <h3>11. Users Workspace</h3>
+            <p>The <code>Users</code> screen uses two real tabs: <code>Team Directory</code> and <code>Editor</code>.</p>
+            <ul>
+                <li>Account filter form</li>
+                <li>User table with <code>Edit</code> and <code>Delete</code></li>
+                <li>Account creation and editing form</li>
+                <li>Role selection for <code>customer</code>, <code>staff</code>, <code>manager</code>, <code>admin</code>, and <code>super_admin</code></li>
+            </ul>
+        </section>
+
+        <section class="manual-block">
+            <h3>12. Super Admin Workspace</h3>
+            <p>The <code>Super Admin</code> view is organized into the real control areas <code>Overview</code>, <code>Setup</code>, <code>Product Catalog</code>, <code>Stock Flow</code>, <code>Inventory Summary</code>, <code>User Accounts</code>, <code>Security</code>, and <code>Logs</code>.</p>
+            <p>Typical components include KPI overview cards, role distribution tables, shortcut cards, setup counts, product and stock summary cards, user-account actions, security tools, and log or activity panels.</p>
+        </section>
+
+        <section class="manual-block">
+            <h3>13. Logging Out</h3>
+            <ol>
+                <li>Click <code>Logout</code> from the top header.</li>
+                <li>Wait for the session to close.</li>
+                <li>The system returns the user to the public landing view.</li>
+            </ol>
+        </section>
+
+        <div class="flow-note">
+            Actual role-based flow: Landing Page -> Login -> Customer Home / Staff Desk / Dashboard -> Module Workspace -> Transaction, Review, or Report -> Refresh or Logout
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Component</th>
+                    <th>Purpose</th>
+                    <th>Actual Use in the System</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Sidebar menu</td><td>Role-based module access</td><td>Opens Dashboard, Staff Desk, Customer Home, POS, Operations, Reports, Users, or Super Admin</td></tr>
+                <tr><td>Top header</td><td>Context and session control</td><td>Shows active view title, subtitle, user box, refresh, and logout</td></tr>
+                <tr><td>Guide panels</td><td>Workflow orientation</td><td>Used in Dashboard, Operations, Reports, and Super Admin</td></tr>
+                <tr><td>KPI cards and chips</td><td>Quick metrics</td><td>Used in Dashboard, Staff Desk, Customer Home, Inventory Summary, and Super Admin</td></tr>
+                <tr><td>Data tables</td><td>Record review and monitoring</td><td>Used for products, inventory, orders, promotions, receipts, reports, logs, and users</td></tr>
+                <tr><td>Form panels</td><td>Transaction and maintenance input</td><td>Used in POS, setup, stock adjustment, receiving, checkout, profile, and user management</td></tr>
+                <tr><td>Status badges</td><td>Visual feedback</td><td>Used for stock condition, order status, login status, and role labels</td></tr>
+                <tr><td>Success and notice panels</td><td>User feedback</td><td>Used for checkout, POS result, and form submission feedback</td></tr>
+            </tbody>
+        </table>
+
+        <h2>XI. Feature Highlights</h2>
+        <p>The current system combines public access, role-based dashboards, sales, stock management, reporting, and governance in one Laravel-based interface.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Actual Screen or Workflow</th>
+                    <th>User Need or Workflow Benefit</th>
+                    <th>Laravel Application</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Role-based landing views</td><td><code>Customer Home</code>, <code>Staff Desk</code>, <code>Dashboard</code></td><td>Sends each role to the correct starting workspace</td><td>Sanctum auth, middleware, role checks</td></tr>
+                <tr><td>Shared application shell</td><td>Sidebar plus top header</td><td>Keeps navigation and session controls consistent</td><td>Blade structure, dynamic state handling</td></tr>
+                <tr><td>Admin dashboard</td><td><code>dashboardView</code></td><td>Shows stock risk, movement, category stock, and sales trends at a glance</td><td>Dashboard controller, Eloquent queries, reporting endpoints</td></tr>
+                <tr><td>Staff desk</td><td><code>staffHomeView</code></td><td>Gives staff quick access to checkout, stock alerts, and shift data</td><td>Role-aware rendering, shared dashboard data</td></tr>
+                <tr><td>Customer workspace</td><td><code>customerView</code> with <code>Browse</code>, <code>Orders</code>, <code>Favorites</code>, and <code>Profile</code></td><td>Supports product browsing, ordering, tracking, favorites, delivery profile, and reviews</td><td>Protected customer routes, validation, Eloquent relations</td></tr>
+                <tr><td>POS counter</td><td><code>posView</code></td><td>Handles fast warehouse-based checkout with cash, GCash, and discount support</td><td>Validation, file uploads, DB transactions, stock deduction logic</td></tr>
+                <tr><td>Operations workspace</td><td><code>operationsView</code></td><td>Centralizes setup, catalog, adjustments, inventory, receiving, order management, forecasting, and branches</td><td>CRUD controllers, transaction logs, inventory endpoints</td></tr>
+                <tr><td>Reports workspace</td><td><code>reportsView</code></td><td>Groups inventory, sales, access logs, and settings into one reporting area</td><td>Report controllers, query builders, governance endpoints</td></tr>
+                <tr><td>Users workspace</td><td><code>usersView</code></td><td>Helps admins create, edit, filter, and manage accounts</td><td>User controller, access control, form validation</td></tr>
+                <tr><td>Super Admin control center</td><td><code>superAdminView</code></td><td>Supports high-level oversight for setup, stock, accounts, security, and logs</td><td>Super admin routes, audit logs, token control, security reporting</td></tr>
+            </tbody>
+        </table>
+
+        <p>In summary, the actual user experience of the Farm Supply Inventory System is role-based and workspace-driven. The interface starts with the correct home screen for each role, then branches into dedicated modules for shopping, checkout, POS, operations, reports, user administration, and super admin governance.</p>
+    </main>
+</body>
+</html>

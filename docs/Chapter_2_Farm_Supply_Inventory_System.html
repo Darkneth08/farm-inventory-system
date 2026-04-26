@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2 - Farm Supply Inventory System</title>
+    <style>
+        :root {
+            --text: #16202a;
+            --muted: #52606d;
+            --rule: #d9dee3;
+            --paper: #ffffff;
+            --accent: #1d5c3f;
+            --accent-soft: #eef7f1;
+            --panel: #f7f9fb;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: #eef1f4;
+            color: var(--text);
+            font-family: "Times New Roman", Georgia, serif;
+            line-height: 1.65;
+        }
+
+        .page {
+            width: min(980px, calc(100% - 32px));
+            margin: 32px auto;
+            background: var(--paper);
+            padding: 56px 64px;
+            box-shadow: 0 12px 36px rgba(15, 23, 42, 0.08);
+        }
+
+        h1, h2, h3, h4 {
+            margin: 0 0 12px;
+            line-height: 1.3;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 30px;
+        }
+
+        h2 {
+            margin-top: 30px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--rule);
+            color: var(--accent);
+            font-size: 24px;
+        }
+
+        h3 {
+            margin-top: 22px;
+            font-size: 20px;
+        }
+
+        p {
+            margin: 0 0 14px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 0 0 16px 24px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 12px 0 18px;
+            font-size: 14px;
+        }
+
+        th, td {
+            border: 1px solid var(--rule);
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background: var(--accent-soft);
+        }
+
+        .subtitle {
+            margin-bottom: 24px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .note {
+            padding: 12px 14px;
+            border-left: 4px solid var(--accent);
+            background: var(--accent-soft);
+            margin: 12px 0 18px;
+        }
+
+        .diagram {
+            background: #101820;
+            color: #f3f7fa;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: "Courier New", monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            white-space: pre;
+        }
+
+        .page-break {
+            break-before: page;
+        }
+
+        @media print {
+            body { background: #fff; }
+            .page {
+                width: auto;
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="page">
+        <h1>Chapter 2: Design Artifacts and Analysis</h1>
+        <p class="subtitle">Farm Supply Inventory System</p>
+
+        <h2>VI. Wireframes</h2>
+        <p>The actual Farm Supply Inventory System uses a shared application shell with a left sidebar, a top header, and role-based views. After login, the first screen depends on the user role: <strong>customer</strong> users land on <strong>Customer Home</strong>, <strong>staff</strong> users land on <strong>Staff Desk</strong>, and <strong>manager</strong>, <strong>admin</strong>, and <strong>super_admin</strong> users land on <strong>Dashboard</strong>. Because the PDF requires a dashboard wireframe, the first diagram below follows the real <strong>Dashboard</strong> page used by manager, admin, and super admin users in the current system.</p>
+
+        <h3>A. Dashboard Page Wireframe</h3>
+        <p><strong>Representative screen:</strong> <code>dashboardView</code></p>
+
+        <pre class="diagram">+------------------------------------------------------------------------------------------------------------------+
+| SIDEBAR                                                                 | TOP HEADER                             |
+| Farm Supply Inventory                                                   | Dashboard                              |
+| Daily inventory workspace                                               | See stock, sales, and alerts at a glance. |
+| [Control Center pill]                                                   | User box | Refresh | Logout            |
+|                                                                                                                  |
+| Dashboard                                                                                                        |
+| Staff Desk (role-based)                                                                                            |
+| Home / Shop / My Orders / Favorites / Profile (customer-only)                                                     |
+| POS / POS Counter (role-based)                                                                                     |
+| Operations                                                                                                         |
+| Reports / Shift Reports (role-based)                                                                               |
+| Users (admin+)                                                                                                     |
+| Super Admin (super_admin only)                                                                                     |
++------------------------------------------------------------------------------------------------------------------+
+| ADMIN OVERVIEW / WORKSPACE GUIDE                                                                                   |
+| Check today's priorities first.                                                                                   |
+| [Open Stock Tasks] [Open Reports]                                                                                 |
+| [1. Watch] [2. Update] [3. Review]                                                                                |
++------------------------------------------------------------------------------------------------------------------+
+| KPI CARDS                                                                                                         |
+| Products | Active Products | Low Stock | Out Of Stock | Inventory Value | Today Sales | Month Sales | Suppliers |
+| Branches                                                                                                          |
++------------------------------------------------------------------------------------------------------------------+
+| Low-Stock Watch                                      | Recent Activity                                            |
+| Product | Stock | Reorder | Status                  | transaction number | type | product | qty | date          |
++------------------------------------------------------------------------------------------------------------------+
+| Top Movers                                           | Stock by Category          | Monthly Sales                 |
+| Product | Moved Qty                                  | Category | Stock           | Month | Total                 |
++------------------------------------------------------------------------------------------------------------------+</pre>
+
+        <ol>
+            <li>The left sidebar is the shared navigation shell of the system, and some menu items only appear for specific roles.</li>
+            <li>The top header shows the active view title, subtitle, current user, and the <code>Refresh</code> and <code>Logout</code> controls.</li>
+            <li>The dashboard starts with the real <code>Admin overview</code> guide panel and its shortcut buttons.</li>
+            <li>The workflow strip matches the actual dashboard guidance in the system: <code>Watch</code>, <code>Update</code>, and <code>Review</code>.</li>
+            <li>The KPI area reflects the metrics loaded by the real dashboard API: products, active products, low stock, out of stock, inventory value, today sales, month sales, suppliers, and branches.</li>
+            <li>The <code>Low-Stock Watch</code> table lists products below reorder point.</li>
+            <li>The <code>Recent Activity</code> panel shows recent stock transactions.</li>
+            <li>The lower analytics area contains <code>Top Movers</code>, <code>Stock by Category</code>, and <code>Monthly Sales</code>.</li>
+        </ol>
+
+        <h3>B. Main Transaction Page Wireframe</h3>
+        <p><strong>Representative transaction:</strong> <code>POS Counter / Point of Sale</code></p>
+        <p>The current system contains several transactions, but the clearest dedicated transaction screen in the actual UI is the <strong>POS</strong> page. It is directly connected to the <strong>Staff Desk</strong> through the <code>Open POS</code> action.</p>
+
+        <pre class="diagram">+------------------------------------------------------------------------------------------------------------------+
+| TOP HEADER                                                                                                       |
+| Point of Sale | Process sales and review recent counter activity.                                                |
+| User box | Refresh | Logout                                                                                     |
++------------------------------------------------------------------------------------------------------------------+
+| POS HERO / STEP STRIP                                                                                            |
+| Fast counter checkout                                                                                            |
+| Warehouse label + live stock source                                                                              |
+| [1 Select warehouse] [2 Add products] [3 Complete payment]                                                       |
+| Catalog items | Available units | Cart items | Grand total                                                       |
++------------------------------------------------------------------------------------------------------------------+
+| 1. PICK PRODUCTS                                          | 2. REVIEW AND PAY                                    |
+| Warehouse select                                          | Customer name (optional)                              |
+| Search product / SKU / category                           | Payment method: Cash / GCash                          |
+| Apply Filter / Clear Search                               | Discount type: None / Senior / PWD                    |
+| Live product cards with:                                  | Discount amount                                       |
+| - product name                                            | Senior/PWD ID number (conditional)                    |
+| - SKU and unit                                            | Senior/PWD proof upload (conditional)                 |
+| - stock badge                                             | Amount tendered (cash)                                |
+| - price                                                   | Cash quick buttons: Exact / +100 / +500 / +1000       |
+| - available units                                         | GCash reference number (conditional)                  |
+| - reorder point                                           | GCash receipt upload (conditional)                    |
+| - batch / expiry info                                     | Notes                                                 |
+| - qty input + Add to Sale                                 | Sale cart with editable line quantities               |
+|                                                           | Items | Subtotal | Discount | Grand total             |
+|                                                           | Amount tendered | Balance due | Change                |
+|                                                           | Payment status | Complete Sale                        |
++------------------------------------------------------------------------------------------------------------------+
+| 3. SALE RESULT / RECENT POS SALES                                                                                 |
+| Success summary card after checkout                                                                              |
+| Print Last Receipt                                                                                               |
+| Recent POS Sales table: Sale # | Cashier | Items | Total | Payment | GCash Ref | Date                          |
++------------------------------------------------------------------------------------------------------------------+</pre>
+
+        <ol>
+            <li>The POS page begins with a dedicated <code>POS Workspace</code> hero and step strip, not with a plain form.</li>
+            <li>The warehouse selector is required because the catalog is warehouse-aware and loads live stock from the chosen source.</li>
+            <li>Product cards show quantity, stock, price, reorder point, and batch or expiry context before items are added to the sale.</li>
+            <li>The payment area changes dynamically based on the selected payment method and discount type.</li>
+            <li>Cash mode shows <code>Amount Tendered</code> and quick-cash buttons, while GCash mode shows reference and receipt upload fields.</li>
+            <li>Senior and PWD discounts reveal ID number and ID proof inputs because the real system supports verified discount handling.</li>
+            <li>The cart is editable directly from the checkout panel, and the total summary includes subtotal, discount, grand total, balance due, change, and payment status.</li>
+            <li>After a successful sale, the result appears in the <code>Sale result</code> card and can be printed through <code>Print Last Receipt</code>.</li>
+        </ol>
+
+        <div class="page-break"></div>
+
+        <h2>VII. Task Analysis</h2>
+        <p><strong>Main transaction analyzed:</strong> Staff POS checkout</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Step</th>
+                    <th>User Action</th>
+                    <th>System Response</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>A staff user opens the system and logs in.</td>
+                    <td>The system authenticates the account and opens <code>Staff Desk</code> as the default staff landing view.</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>The user clicks <code>Open POS</code> from <code>Staff Desk</code>, or opens <code>POS Counter</code> from the sidebar.</td>
+                    <td>The system switches to the <code>Point of Sale</code> view.</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>The user selects a warehouse.</td>
+                    <td>The system loads the live POS catalog, warehouse label, stock-source note, and POS header metrics.</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>The user searches the catalog and enters item quantities.</td>
+                    <td>The system filters product cards and shows availability, reorder point, batch count, and expiry information.</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>The user clicks <code>Add to Sale</code> on one or more products.</td>
+                    <td>The system adds products to the sale cart and updates items, subtotal, discount, grand total, and payment status.</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>The user enters optional customer name, selects payment method, and chooses a discount type.</td>
+                    <td>The system reveals the correct conditional fields such as cash tendered, GCash reference and receipt upload, or senior/PWD verification inputs.</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>The user reviews the cart and adjusts quantities if needed.</td>
+                    <td>The system recalculates subtotal, discount, amount tendered, balance due, and change in real time.</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>The user clicks <code>Complete Sale</code>.</td>
+                    <td>Laravel validation checks request fields, required proof inputs, payment readiness, and stock availability in the selected warehouse.</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>If the transaction is valid, the system stores the sale.</td>
+                    <td>The system creates sale records, sale items, related stock-out transactions, and deducts inventory from the correct warehouse batches.</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>The transaction finishes successfully.</td>
+                    <td>The system shows the success summary in <code>Sale result</code>, adds the sale to <code>Recent POS Sales</code>, and enables <code>Print Last Receipt</code>.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>VIII. Gantt Chart</h2>
+        <p>The schedule below presents a practical development timeline covering planning, design, implementation, testing, and documentation.</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Task</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Duration</th>
+                    <th>W1</th>
+                    <th>W2</th>
+                    <th>W3</th>
+                    <th>W4</th>
+                    <th>W5</th>
+                    <th>W6</th>
+                    <th>W7</th>
+                    <th>W8</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Project Planning</td><td>February 2, 2026</td><td>February 6, 2026</td><td>5 days</td><td>X</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>Database Design (ERD, migrations)</td><td>February 9, 2026</td><td>February 13, 2026</td><td>5 days</td><td></td><td>X</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>Wireframing and UI/UX</td><td>February 16, 2026</td><td>February 20, 2026</td><td>5 days</td><td></td><td></td><td>X</td><td></td><td></td><td></td><td></td><td></td></tr>
+                <tr><td>Backend Development (Models, Controllers, Routes)</td><td>February 23, 2026</td><td>March 6, 2026</td><td>10 days</td><td></td><td></td><td></td><td>X</td><td>X</td><td></td><td></td><td></td></tr>
+                <tr><td>Frontend Development (Blade, CSS, JS)</td><td>March 2, 2026</td><td>March 13, 2026</td><td>10 days</td><td></td><td></td><td></td><td></td><td>X</td><td>X</td><td></td><td></td></tr>
+                <tr><td>Testing and Debugging</td><td>March 16, 2026</td><td>March 20, 2026</td><td>5 days</td><td></td><td></td><td></td><td></td><td></td><td></td><td>X</td><td></td></tr>
+                <tr><td>Documentation and Finalization</td><td>March 23, 2026</td><td>March 27, 2026</td><td>5 days</td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>X</td></tr>
+            </tbody>
+        </table>
+
+        <h2>IX. Entity-Relationship Diagram (ERD)</h2>
+        <p>The Farm Supply Inventory System uses a relational structure that links users, product data, inventory, stock movement, orders, sales, reviews, notifications, and governance records. The simplified ERD below summarizes the major entities used by the application.</p>
+
+        <pre class="diagram">ROLES 1 ---- * USERS
+BRANCHES 1 ---- * WAREHOUSES
+CATEGORIES 1 ---- * PRODUCTS
+SUPPLIERS 1 ---- * PRODUCTS
+SUPPLIERS 1 ---- * INVENTORY
+PRODUCTS 1 ---- * INVENTORY
+WAREHOUSES 1 ---- * INVENTORY
+PRODUCTS 1 ---- * TRANSACTIONS
+INVENTORY 1 ---- * TRANSACTIONS
+USERS 1 ---- * TRANSACTIONS
+
+USERS 1 ---- * ORDERS
+ORDERS 1 ---- * ORDER_ITEMS
+PRODUCTS 1 ---- * ORDER_ITEMS
+USERS 1 ---- * USER_NOTIFICATIONS
+USERS 1 ---- * PRODUCT_REVIEWS
+PRODUCTS 1 ---- * PRODUCT_REVIEWS
+USERS 1 ---- * CUSTOMER_REQUESTS
+PRODUCTS 1 ---- * CUSTOMER_REQUESTS
+
+USERS 1 ---- * SALES
+SALES 1 ---- * SALE_ITEMS
+PRODUCTS 1 ---- * SALE_ITEMS</pre>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Entity</th>
+                    <th>Sample Attributes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Roles</td><td><code>id</code>, <code>role_name</code></td></tr>
+                <tr><td>Users</td><td><code>id</code>, <code>role_id</code>, <code>name</code>, <code>email</code>, <code>phone</code>, <code>address</code>, <code>status</code></td></tr>
+                <tr><td>Categories</td><td><code>id</code>, <code>slug</code>, <code>name</code>, <code>description</code>, <code>is_active</code></td></tr>
+                <tr><td>Suppliers</td><td><code>id</code>, <code>name</code>, <code>contact_person</code>, <code>email</code>, <code>phone</code></td></tr>
+                <tr><td>Products</td><td><code>id</code>, <code>category_id</code>, <code>supplier_id</code>, <code>sku</code>, <code>name</code>, <code>unit_price</code>, <code>current_stock</code>, <code>reorder_point</code></td></tr>
+                <tr><td>Branches</td><td><code>id</code>, <code>code</code>, <code>name</code>, <code>location</code>, <code>is_active</code></td></tr>
+                <tr><td>Warehouses</td><td><code>id</code>, <code>branch_id</code>, <code>code</code>, <code>name</code>, <code>location</code>, <code>is_active</code></td></tr>
+                <tr><td>Inventory</td><td><code>id</code>, <code>product_id</code>, <code>warehouse_id</code>, <code>supplier_id</code>, <code>batch_number</code>, <code>quantity</code>, <code>unit_cost</code>, <code>selling_price</code>, <code>expiry_date</code>, <code>status</code></td></tr>
+                <tr><td>Transactions</td><td><code>id</code>, <code>product_id</code>, <code>inventory_id</code>, <code>warehouse_id</code>, <code>user_id</code>, <code>transaction_type</code>, <code>quantity</code>, <code>total_amount</code></td></tr>
+                <tr><td>Orders</td><td><code>id</code>, <code>customer_user_id</code>, <code>processed_by_user_id</code>, <code>order_number</code>, <code>status</code>, <code>payment_method</code>, <code>total</code></td></tr>
+                <tr><td>Order Items</td><td><code>id</code>, <code>order_id</code>, <code>product_id</code>, <code>quantity</code>, <code>unit_price</code>, <code>line_total</code></td></tr>
+                <tr><td>Sales</td><td><code>id</code>, <code>customer_user_id</code>, <code>cashier_user_id</code>, <code>sale_number</code>, <code>payment_method</code>, <code>discount_type</code>, <code>total</code></td></tr>
+                <tr><td>Sale Items</td><td><code>id</code>, <code>sale_id</code>, <code>product_id</code>, <code>quantity</code>, <code>unit_price</code>, <code>line_total</code></td></tr>
+                <tr><td>User Notifications</td><td><code>id</code>, <code>user_id</code>, <code>type</code>, <code>title</code>, <code>message</code>, <code>data</code></td></tr>
+            </tbody>
+        </table>
+
+        <div class="note">
+            Full editable ERD source: <strong>docs/Farm_Supply_Inventory_System_ERD_Labeled.drawio</strong><br>
+            Relationship notes used for this chapter: <strong>docs/Farm_Supply_Inventory_System_ERD.md</strong>
+        </div>
+    </main>
+</body>
+</html>
