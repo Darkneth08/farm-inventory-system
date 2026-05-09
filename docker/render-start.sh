@@ -13,6 +13,11 @@ if [ -z "${ASSET_URL:-}" ] && [ -n "${APP_URL:-}" ]; then
     export ASSET_URL="$APP_URL"
 fi
 
+if [ "${DB_CONNECTION:-}" = "sqlite" ]; then
+    mkdir -p database
+    touch "${DB_DATABASE:-database/database.sqlite}"
+fi
+
 php artisan config:clear
 php artisan view:clear
 php artisan migrate --force

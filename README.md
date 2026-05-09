@@ -165,7 +165,7 @@ This repository includes Docker and Render Blueprint support:
 - `render.yaml`
 - `docker/render-start.sh`
 
-For Render, create a Blueprint from this GitHub repository. The Blueprint provisions a Docker web service and PostgreSQL database, runs migrations, seeds demo data, and starts Laravel on Render's assigned port.
+For Render, create a Blueprint from this GitHub repository. The free demo Blueprint provisions a Docker web service, uses SQLite inside the service, runs migrations, seeds demo data, and starts Laravel on Render's assigned port.
 
 ## Author
 

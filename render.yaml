@@ -21,15 +21,9 @@ services:
       - key: LOG_LEVEL
         value: info
       - key: DB_CONNECTION
-        value: pgsql
-      - key: DB_URL
-        fromDatabase:
-          name: farm-inventory-db
-          property: connectionString
-      - key: DATABASE_URL
-        fromDatabase:
-          name: farm-inventory-db
-          property: connectionString
+        value: sqlite
+      - key: DB_DATABASE
+        value: database/database.sqlite
       - key: SESSION_DRIVER
         value: database
       - key: CACHE_STORE
@@ -38,10 +32,3 @@ services:
         value: database
       - key: RUN_DEMO_SEEDER
         value: "true"
-
-databases:
-  - name: farm-inventory-db
-    plan: free
-    region: singapore
-    databaseName: farm_inventory
-    user: farm_inventory_user
