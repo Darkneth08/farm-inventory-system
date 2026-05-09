@@ -1,5 +1,7 @@
 # Farm Supply Inventory System
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/Darkneth08/farm-inventory-system)
+
 A web-based inventory and operations system built for farm supply businesses. This project helps teams manage products, stock, suppliers, warehouses, branches, customer orders, POS activity, reports, and super admin controls from one place.
 
 ## Overview
