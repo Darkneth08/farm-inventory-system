@@ -12,10 +12,7 @@ Use Render Blueprint deployment:
 4. Select **Blueprint**.
 5. Connect `Darkneth08/farm-inventory-system`.
 6. Confirm the `render.yaml` configuration.
-7. Set these prompted values after Render creates the service:
-   - `APP_URL`: the final Render service URL
-   - `ASSET_URL`: the same final Render service URL
-8. Deploy.
+7. Deploy.
 
 The Blueprint creates:
 
@@ -33,6 +30,8 @@ The Docker start script runs:
 - `php artisan serve --host=0.0.0.0 --port=$PORT`
 
 The seeder is enabled by default so the deployed project has demo accounts for evaluation. Set `RUN_DEMO_SEEDER=false` in Render if you want to stop demo seeding later.
+
+The start script also derives `APP_URL` and `ASSET_URL` from Render's `RENDER_EXTERNAL_HOSTNAME` when those variables are not set manually.
 
 ## Demo Credentials
 
