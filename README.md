@@ -141,6 +141,29 @@ php artisan test
 
 - ERD source: `docs/Farm_Supply_Inventory_System_ERD_Labeled.drawio`
 - ERD notes: `docs/Farm_Supply_Inventory_System_ERD.md`
+- Final project rubric guide: `docs/FINAL_PROJECT_RUBRIC_GUIDE.md`
+- Render deployment guide: `docs/RENDER_DEPLOYMENT.md`
+
+## Demo Accounts
+
+These seeded accounts are available after running `php artisan db:seed`:
+
+- Super admin: `superadmin@farm.com` / `password`
+- Admin: `admin@farm.com` / `password`
+- Manager: `manager@farm.com` / `password`
+- Staff: `staff@farm.com` / `password`
+- Customer: `customer@farm.com` / `password`
+
+## Deployment
+
+This repository includes Docker and Render Blueprint support:
+
+- `Dockerfile`
+- `.dockerignore`
+- `render.yaml`
+- `docker/render-start.sh`
+
+For Render, create a Blueprint from this GitHub repository. The Blueprint provisions a Docker web service and PostgreSQL database, runs migrations, seeds demo data, and starts Laravel on Render's assigned port.
 
 ## Author
 

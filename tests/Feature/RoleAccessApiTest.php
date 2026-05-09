@@ -16,6 +16,13 @@ class RoleAccessApiTest extends TestCase
             ->assertUnauthorized();
     }
 
+    public function test_guest_api_requests_without_json_header_are_unauthorized(): void
+    {
+        $this->get('/api/user')
+            ->assertUnauthorized()
+            ->assertJsonPath('message', 'Unauthenticated.');
+    }
+
     public function test_customer_cannot_access_staff_only_routes(): void
     {
         $customer = User::factory()->customer()->create();
